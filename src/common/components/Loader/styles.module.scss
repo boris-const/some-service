@@ -1,0 +1,38 @@
+.loader_container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+}
+
+.loader {
+  height: 100px;
+  border-radius: 5px;
+  --c: no-repeat linear-gradient(#6f26cd 0 0);
+  background: var(--c) left, var(--c) center, var(--c) right;
+  background-size: 34px 100%;
+  animation: l33-1 1.5s infinite, l33-2 1.5s infinite;
+}
+@keyframes l33-1 {
+  0%,
+  100% {
+    width: 100px;
+  }
+  35%,
+  65% {
+    width: 120px;
+  }
+}
+@keyframes l33-2 {
+  0%,
+  40% {
+    transform: rotate(0);
+  }
+  60%,
+  100% {
+    transform: rotate(90deg);
+  }
+}

@@ -1,0 +1,17 @@
+@use '../../styles/style.module.scss';
+
+.layout__content_OneExchange {
+  @extend .layout__content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info_section {
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.info__raw {
+  gap: 60px;
+}

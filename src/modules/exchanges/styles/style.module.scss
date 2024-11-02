@@ -1,0 +1,24 @@
+@use '../../../common/styles/base';
+
+// todo sort styles by each folder;
+
+.layout__header_exchange {
+  @extend .layout__header;
+  justify-content: flex-start;
+}
+
+.layout__content_exchanges {
+  @extend .layout__content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filerBar_container {
+}
+
+.info_block_title {
+  font-size: large;
+  font-weight: 700;
+  line-height: 30px;
+}

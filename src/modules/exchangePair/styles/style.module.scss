@@ -1,0 +1,12 @@
+@use '../../../common/styles/base';
+
+.fields-container {
+  width: 1000px;
+}
+
+.filterBar__container {
+  width: 1150px;
+}
+.filterBar__flex {
+  justify-content: space-between;
+}

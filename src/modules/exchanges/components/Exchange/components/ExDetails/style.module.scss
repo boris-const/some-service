@@ -1,0 +1,27 @@
+@use "../../style.module.scss";
+
+.details {
+  justify-content: space-between;
+}
+
+.details__part {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoDetail_container {
+  border: 2px solid #6398ff;
+  border-radius: 10px;
+}
+
+.info__darknet {
+  padding: 16px 10px 16px 10px;
+  width: 300px;
+  border: 1px solid red;
+  border-radius: 10px;
+  article {
+    font-size: 1.4rem;
+    color: red;
+    line-height: 30px;
+  }
+}

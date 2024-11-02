@@ -1,0 +1,6 @@
+@use '../../../common/styles/base';
+
+.layout__header_exTool {
+  @extend .layout__header;
+  justify-content: flex-start;
+}

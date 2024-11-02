@@ -1,0 +1,67 @@
+stages:
+  - build
+  - deploy
+
+#########
+# BUILD
+#########
+build-dev:
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "dev"
+      when: on_success
+    - when: never
+  stage: build
+  interruptible: true
+  tags:
+    - Internal
+    - Worker
+  script:
+    - docker build . -t $CI_REGISTRY_IMAGE:dev-latest --build-arg REACT_APP_BACK_URL=https://...
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:dev-latest
+
+build-prod:
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: on_success
+    - when: never
+  stage: build
+  interruptible: true
+  tags:
+    - Internal
+    - Worker
+  script:
+    - docker build . -t $CI_REGISTRY_IMAGE:prod-latest --build-arg REACT_APP_BACK_URL=https://...
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:prod-latest
+
+#########
+# DEPLOY
+#########
+deploy-dev:
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "dev"
+      when: on_success
+    - when: never
+  stage: deploy
+  interruptible: true
+  tags:
+    - Internal
+    - Manager
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker service update some_service_dev --with-registry-auth --image=$CI_REGISTRY_IMAGE:dev-latest
+
+deploy-prod:
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: on_success
+    - when: never
+  stage: deploy
+  interruptible: true
+  tags:
+    - Internal
+    - Manager
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker service update some_service_prod --with-registry-auth --image=$CI_REGISTRY_IMAGE:prod-latest
